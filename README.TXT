@@ -1,0 +1,1 @@
+Use the build.xml file with ant to build this, not Eclipse
