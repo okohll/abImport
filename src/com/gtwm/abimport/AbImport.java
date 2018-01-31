@@ -355,7 +355,7 @@ public class AbImport {
 	}
 
 	private static Connection getConnection() throws SQLException {
-		String connectionStatement = "jdbc:postgresql://localhost/agilebasedata";
+		String connectionStatement = "jdbc:postgresql://localhost/agilebasedata?ssl=true";
 		Properties connectionProperties = new Properties();
 		connectionProperties.setProperty("user", "gtpb");
 		Connection conn = DriverManager.getConnection(connectionStatement, connectionProperties);
