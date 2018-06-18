@@ -26,7 +26,7 @@
 			<classpath>
 				<pathelement path="${build.dir}" />
         <pathelement location="lib/mail.jar" />
-        <pathelement location="lib/postgresql-9.2-1003.jdbc4.jar" />
+        <pathelement location="lib/postgresql-jdbc4.jar" />
 			</classpath>
 		</javac>
 	</target>
@@ -35,7 +35,7 @@
 		<jar destfile="AbImport.jar" basedir="${build.dir}" includes="**/*.class">
 			<manifest>
 				<attribute name="Main-Class" value="com.gtwm.abimport.AbImport" />
-				<attribute name="Class-Path" value="./ ./lib/mail.jar ./lib/postgresql-9.2-1003.jdbc4.jar" />
+				<attribute name="Class-Path" value="./ ./lib/mail.jar ./lib/postgresql-jdbc4.jar" />
 			</manifest>
 		</jar>
 	</target>

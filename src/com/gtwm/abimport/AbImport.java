@@ -133,6 +133,19 @@ public class AbImport {
 	private static int processOrder() throws IOException, DataFormatException, SQLException,
 			ClassNotFoundException, OrderProcessingException, ParseException, AddressException,
 			MessagingException {
+		Connection testConn = getConnection();
+		testConn.close();
+		// Test connection
+		try {
+			Statement statement = testConn.createStatement();
+			ResultSet results = statement.executeQuery("SELECT 1");
+			results.close();
+			statement.close();
+		} finally {
+			if (testConn != null) {
+				testConn.close();
+			}
+		}
 		// Read piped input
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		String line = null;
@@ -186,7 +199,6 @@ public class AbImport {
 			}
 		}
 		// Some sanity checks
-		List<String> keysThatShouldBePresent = new LinkedList<String>();
 		if (!orderHeader.containsKey("START_TRACT_EDI_ORDERS_FILE")) {
 			throw new DataFormatException("START_TRACT_EDI_ORDERS_FILE not found in the email.");
 		}
