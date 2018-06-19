@@ -135,12 +135,14 @@ public class AbImport {
 	private static int processOrder() throws IOException, DataFormatException, SQLException,
 			ClassNotFoundException, OrderProcessingException, ParseException, AddressException,
 			MessagingException {
-		Connection testConn = getConnection();
-		testConn.close();
 		// Test connection
+		Connection testConn = getConnection();
 		try {
 			Statement statement = testConn.createStatement();
 			ResultSet results = statement.executeQuery("SELECT 1");
+			while (results.next()) {
+				System.out.println("Test results: " + results.getInt(1));
+			}
 			results.close();
 			statement.close();
 		} finally {
@@ -369,8 +371,7 @@ public class AbImport {
 	}
 
 	private static Connection getConnection() throws SQLException {
-		String connectionStatement = "jdbc:postgresql://localhost/agilebasedata?ssl=true";
-
+		// String connectionStatement = "jdbc:postgresql://localhost/agilebasedata?ssl=true";
 		Properties connectionProperties = new Properties();
 		connectionProperties.setProperty("user", "gtpb");
 		//Connection conn = DriverManager.getConnection(connectionStatement, connectionProperties);
