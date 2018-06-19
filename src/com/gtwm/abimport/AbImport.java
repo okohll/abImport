@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.DriverManager;
+// import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +31,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import org.postgresql.jdbc3.Jdbc3SimpleDataSource;
 
 public class AbImport {
 	public AbImport() {
@@ -368,9 +369,15 @@ public class AbImport {
 
 	private static Connection getConnection() throws SQLException {
 		String connectionStatement = "jdbc:postgresql://localhost/agilebasedata?ssl=true";
+
 		Properties connectionProperties = new Properties();
 		connectionProperties.setProperty("user", "gtpb");
-		Connection conn = DriverManager.getConnection(connectionStatement, connectionProperties);
+		//Connection conn = DriverManager.getConnection(connectionStatement, connectionProperties);
+		source.setServerName("localhost");
+		source.setDatabaseName("agilebasedata");
+		source.setSsl(true);
+		source.setUser("gtpb");
+		Connection conn = source.getConnection();
 		conn.setAutoCommit(false);
 		return conn;
 	}
@@ -450,4 +457,7 @@ public class AbImport {
 	private static final String toAddressString = "gareth.curtis@chfoods.co.uk";
 
 	private static final String ccAddressString = "oliver@agilebase.co.uk";
+	
+	private static final Jdbc3SimpleDataSource source = new Jdbc3SimpleDataSource();
+
 }
