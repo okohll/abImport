@@ -48,6 +48,7 @@ public class AbImport {
 		} catch (DataFormatException dfex) {
 			emailError(dfex);
 		} catch (SQLException sqlex) {
+			sqlex.printStackTrace();
 			emailError(sqlex);
 		} catch (ClassNotFoundException cnfex) {
 			emailError(cnfex);
