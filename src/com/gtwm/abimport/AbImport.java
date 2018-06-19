@@ -135,21 +135,7 @@ public class AbImport {
 	private static int processOrder() throws IOException, DataFormatException, SQLException,
 			ClassNotFoundException, OrderProcessingException, ParseException, AddressException,
 			MessagingException {
-		// Test connection
-		Connection testConn = getConnection();
-		try {
-			Statement statement = testConn.createStatement();
-			ResultSet results = statement.executeQuery("SELECT 1");
-			while (results.next()) {
-				System.out.println("Test results: " + results.getInt(1));
-			}
-			results.close();
-			statement.close();
-		} finally {
-			if (testConn != null) {
-				testConn.close();
-			}
-		}
+		// testConnection();
 		// Read piped input
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		String line = null;
@@ -366,6 +352,24 @@ public class AbImport {
 		} finally {
 			if (conn != null) {
 				conn.close();
+			}
+		}
+	}
+
+	private static void testConnection() throws SQLException {
+		// Test connection
+		Connection testConn = getConnection();
+		try {
+			Statement statement = testConn.createStatement();
+			ResultSet results = statement.executeQuery("SELECT 1");
+			while (results.next()) {
+				System.out.println("Test results: " + results.getInt(1));
+			}
+			results.close();
+			statement.close();
+		} finally {
+			if (testConn != null) {
+				testConn.close();
 			}
 		}
 	}
